@@ -1,6 +1,6 @@
 # Algo-Collection
 
-This is our repo for solved algorithms. 
+This is our repo for solved algorithms and non-algorithm interview questions. 
 
 If you have an alternative solution to a problem that's already in here, feel free to add your solution below the one already included. If it's more efficient, it would be great to add a note about that.
 
