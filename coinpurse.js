@@ -4,6 +4,8 @@ Note that an unlimited amount of coins is at your disposal. If it is impossible 
 */
 
 
+// Leet code refers to this approach — enumerating all subsets — as the 'trivial' solution
+// Time complexity is exponential (I think) 
 
 function myMinNumberOfCoinsForChange(n, denoms){
   let sums = denoms;
@@ -30,3 +32,34 @@ function myMinNumberOfCoinsForChange(n, denoms){
 
 // myMinNumberOfCoinsForChange(7, [1, 5, 10])
 // myMinNumberOfCoinsForChange(7, [1, 2, 3, 5])
+
+// optimized: 
+
+function coinChange(coins, amount) {
+  coins.sort((a, b) => b - a);
+
+  let res = Infinity;
+
+  function helper(k, amount, count) {
+    const coin = coins[k];
+
+    // last smallest coin
+    if (k === coins.length - 1) {
+      if (amount % coin === 0) {
+        res = Math.min(res, count + Math.floor(amount / coin));
+      }
+    } else {
+      for (let i = Math.floor(amount / coin); i >= 0 && count + i < res; i--) {   // count + i < res is for pruning, avoid unnecessary calculation
+        helper(k + 1, amount - coin * i, count + i);
+      }
+    }
+  }
+
+  helper(0, amount, 0);
+
+  return res === Infinity ? -1 : res;
+}
+
+
+// coinChange([1, 5, 7, 10], 14);
+
